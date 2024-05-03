@@ -1,38 +1,56 @@
+* {
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --font-roboto: "Roboto Slab", serif;
+  --font-raleway: "Raleway", sans-serif;
+}
+
+@font-face {
+  font-family: "Oxanium-Bold";
+  src: URL("/public/fonts/Oxanium-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Oxanium-ExtraBold";
+  src: URL("/public/fonts/Oxanium-ExtraBold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Oxanium-ExtraLight";
+  src: URL("/public/fonts/Oxanium-ExtraLight.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Oxanium-Light";
+  src: URL("/public/fonts/Oxanium-Light.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Oxanium-Medium";
+  src: URL("/public/fonts/Oxanium-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Oxanium-Regular";
+  src: URL("/public/fonts/Oxanium-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "Oxanium-SemiBold";
+  src: URL("/public/fonts/Oxanium-SemiBold.ttf") format("truetype");
+}
+
 .App {
-  text-align: center;
+  width: 100%;
+  padding: 4.25em 3.1875em 11.25em;
+  box-sizing: border-box;
+  background-color: #12131d;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.container {
+  flex-direction: row;
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  column-gap: 2.5em;
+  row-gap: 2.5em;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }
