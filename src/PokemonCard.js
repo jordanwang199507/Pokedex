@@ -19,17 +19,30 @@ import rockIcon from "./type-icons/rock.png";
 import steelIcon from "./type-icons/steel.png";
 import waterIcon from "./type-icons/water.png";
 
-const PokemonCard = ({ pokemon }) => {
+const PokemonCard = ({ index }) => {
   const [pokemonMetaData, setPokemonMetaData] = useState({});
+  console.log(index);
   const imagesrc = "https://img.pokemondb.net/sprites/home/normal/"; // to fetch pokemon image
+  const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/";
+  const gifsrc = "https://projectpokemon.org/images/normal-sprite/";
+  // const searchPokemonMetaData = async () => {
+  //   //to fetch more individual pokemon information
+  //   const response = await fetch(`${pokemon.url}`);
+  //   const data = await response.json();
+  //   setPokemonMetaData(data);
+  //   console.log(pokemonMetaData);
+  // };
   const searchPokemonMetaData = async () => {
     //to fetch more individual pokemon information
-    const response = await fetch(`${pokemon.url}`);
+    console.log(`${API_URL_INITIAL}${index}`);
+    const response = await fetch(`${API_URL_INITIAL}${index}`);
+    // const response1 = await fetch(`https://pokeapi.co/api/v2/type/${index}`);
+    // const data1 = await response1.json();
     const data = await response.json();
     setPokemonMetaData(data);
     console.log(pokemonMetaData);
+    // console.log(data1);
   };
-
   const formatPokemonIdToFourDigits = (number) =>
     number.toString().padStart(4, "0");
 
