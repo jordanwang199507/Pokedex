@@ -1,7 +1,30 @@
+html {
+  font-size: 62.5%; /* 62.5% of 16px default font size = 10px */
+}
+
 * {
   margin: 0;
   border: 0;
   box-sizing: border-box;
+}
+
+/* SCROLLBAR */
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: rgb(0, 0, 0, 0.4);
+  border: 2px solid transparent;
+  background-clip: content-box; /* THIS IS IMPORTANT */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #edd63f6c;
+  border-radius: 5px;
 }
 
 :root {
@@ -40,25 +63,79 @@
 
 .App {
   width: 100%;
-  padding: 4.25em 3.1875em 11.25em;
   box-sizing: border-box;
-  background-color: #12131d;
+  background-color: #252530;
+  display: grid;
+  /* grid-template-rows / grid-template-columns*/
+  grid-template:
+    min-content / [sidepadding-start] minmax(2rem, 1fr)
+    [sidepadding-end sidebar-start] 22rem [sidebar-end center-start] repeat(
+      8,
+      [col-start] minmax(min-content, 15rem) [col-end]
+    )
+    [center-end] minmax(2rem, 1fr) [full-end];
+}
+
+.sidebar {
+  grid-column: sidebar-start / sidebar-end;
+  min-height: 100%;
+  /* max-height: 100rem; */
+  height: auto;
+  overflow-y: auto; /* Enables vertical scrolling when content exceeds the container's height */
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0;
 }
 
 .container {
-  max-width: 1440px;
-  margin: auto;
+  grid-column: center-start / center-end;
+  padding-left: 2rem;
+  /* display: grid;
+  grid-template-rows:
+    [row-1-start]15vh [row-1-end row-2-start] minmax(6rem, 5vh)
+    [row-2-end row-3-start] minmax(min-content, 65vh)
+    [row-3-end row-4-start]
+    15vh [row-4-end]; */
 }
 
+.pokedex_title_row {
+  margin: 4rem 0rem 5rem 0rem;
+}
+.pokedex_title_container {
+  width: fit-content;
+  block-size: fit-content;
+  margin: auto;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.745));
+}
+.pokedex_title {
+  font-family: "Oxanium-ExtraBold";
+  text-transform: uppercase;
+  font-size: 4.8rem;
+  color: #ffffff;
+}
+.pokedex_title_id_container {
+  display: flex;
+  font-size: 2.4rem;
+  font-family: "Oxanium-Medium";
+  color: rgba(237, 213, 63, 0.75);
+}
+.pokedex_title_id-start {
+  padding-right: 0.5rem;
+}
+.pokedex_title_id-end {
+  padding-left: 0.5rem;
+}
 .pokedex_container {
+  /* grid-row: row-3-start / row-3-end; */
   flex-direction: row;
   display: flex;
   flex-wrap: wrap;
-  column-gap: 3em;
-  row-gap: 3em;
+  column-gap: 2.5rem;
+  row-gap: 3rem;
   align-items: center;
   justify-content: center;
 }
+
 /* 
 @media (max-width: 480px) {
   .container {

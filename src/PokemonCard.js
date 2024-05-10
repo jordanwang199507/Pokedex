@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "./PokemonCard.css";
+import { ReactComponent as PokeBallUnder } from "./assets/Pokeball_under.svg";
 import bugIcon from "./type-icons/bug.png";
 import darkIcon from "./type-icons/dark.png";
 import dargonIcon from "./type-icons/dragon.png";
@@ -22,7 +23,8 @@ import waterIcon from "./type-icons/water.png";
 const PokemonCard = ({ index }) => {
   const [pokemonMetaData, setPokemonMetaData] = useState({});
   console.log(index);
-  const imagesrc = "https://img.pokemondb.net/sprites/home/normal/"; // to fetch pokemon image
+  // const imagesrc = "https://img.pokemondb.net/sprites/home/normal/"; // to fetch pokemon image
+  const imagesrc = "https://www.serebii.net/scarletviolet/pokemon/new/small/";
   const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/";
   const gifsrc = "https://projectpokemon.org/images/normal-sprite/";
   // const searchPokemonMetaData = async () => {
@@ -73,11 +75,14 @@ const PokemonCard = ({ index }) => {
     steel: steelIcon,
     water: waterIcon,
   };
-
+  const pokemonCardFormatIDforImage = (pokemonId) =>
+    pokemonId < 999
+      ? pokemonId.toString().padStart(3, "0")
+      : pokemonId.toString();
   const pokemonCardBorderTypeClassName = (pokemonType) =>
     "pokemon_card_border_type_" + pokemonType;
-  const pokemonCardTypeClassName = (pokemonType) =>
-    "pokemon_card_type_" + pokemonType;
+  const pokemonCardPokeBallTypeClassName = (pokemonType) =>
+    "pokemon_card_pokeball_type_" + pokemonType;
   const pokemonCardStatsTypeClassName = (pokemonType) =>
     "pokemon_card_stats_type_" + pokemonType;
   const pokemonCardStatsTopLeftBorder = (pokemonType) =>
@@ -98,17 +103,29 @@ const PokemonCard = ({ index }) => {
             pokemonMetaData.types[0].type.name
           )}`}
         >
-          <div
-            className={`pokemon_card ${pokemonCardTypeClassName(
-              pokemonMetaData.types[0].type.name
-            )}`}
-          >
-            <div className="pokemon_card_image-container">
-              <img
-                src={`${imagesrc}${pokemonMetaData.name}.png`}
-                alt={pokemonMetaData.name}
-                className="pokemon_card_image"
-              />
+          <div className={`pokemon_card`}>
+            <div className="pokemon_card_image-section">
+              <div className="pokemon_card_image-container">
+                <img
+                  src={`${imagesrc}${pokemonCardFormatIDforImage(
+                    pokemonMetaData.id
+                  )}.png`}
+                  alt={pokemonMetaData.name}
+                  className="pokemon_card_image"
+                />
+              </div>
+              <div className="pokemon_card_pokeball-background">
+                {/* <img
+                  src={pokeBall_under}
+                  alt={pokemonMetaData.name}
+                  className="pokemon_card_image"
+                /> */}
+                <PokeBallUnder
+                  className={`${pokemonCardPokeBallTypeClassName(
+                    pokemonMetaData.types[0].type.name
+                  )}`}
+                />
+              </div>
             </div>
             <div
               className={`pokemon_card_stats-container ${pokemonCardStatsTypeClassName(
@@ -121,13 +138,13 @@ const PokemonCard = ({ index }) => {
                 )}`}
               >
                 <div className="pokemon_card_name-secondary">
-                  #{formatPokemonIdToFourDigits(pokemonMetaData.id)}
+                  N°{formatPokemonIdToFourDigits(pokemonMetaData.id)}
                 </div>
                 <h2 className="pokemon_card_name-primary">
                   {capitalize(pokemonMetaData.name)}
                 </h2>
               </div>
-              <div className="pokemon_card_stats-bottom">
+              {/* <div className="pokemon_card_stats-bottom">
                 <div className="pokemon_card_height">
                   <div className="pokemon_card_text-primary">Height</div>
                   <div className="pokemon_card_text-secondary">
@@ -142,12 +159,40 @@ const PokemonCard = ({ index }) => {
                     <span>K.G.</span>
                   </div>
                 </div>
-              </div>
+              </div> */}
             </div>
             <div className="pokemon_card_type-container">
               {pokemonMetaData.types.length > 1 ? (
                 <>
                   <div
+                    className={`pokemon_card_type-icon ${pokemonCardTypeIconClassName(
+                      pokemonMetaData.types[0].type.name
+                    )}`}
+                  >
+                    <div className="pokemon_card_icon_image">
+                      <img
+                        src={pokemonCardTypeIconPng(
+                          pokemonMetaData.types[0].type.name
+                        )}
+                        alt={pokemonMetaData.types[0].type.name}
+                      />
+                    </div>
+                  </div>
+                  <div
+                    className={`pokemon_card_type-icon ${pokemonCardTypeIconClassName(
+                      pokemonMetaData.types[1].type.name
+                    )}`}
+                  >
+                    <div className="pokemon_card_icon_image">
+                      <img
+                        src={pokemonCardTypeIconPng(
+                          pokemonMetaData.types[1].type.name
+                        )}
+                        alt={pokemonMetaData.types[1].type.name}
+                      />
+                    </div>
+                  </div>
+                  {/* <div
                     className={`pokemon_card_type ${pokemonCardTypeIconClassName(
                       pokemonMetaData.types[0].type.name
                     )}`}
@@ -181,11 +226,11 @@ const PokemonCard = ({ index }) => {
                     <div className="pokemon_card-type_name">
                       {pokemonMetaData.types[1].type.name}
                     </div>
-                  </div>
+                  </div> */}
                 </>
               ) : (
                 <div
-                  className={`pokemon_card_type ${pokemonCardTypeIconClassName(
+                  className={`pokemon_card_type-icon ${pokemonCardTypeIconClassName(
                     pokemonMetaData.types[0].type.name
                   )}`}
                 >
@@ -197,11 +242,25 @@ const PokemonCard = ({ index }) => {
                       alt={pokemonMetaData.types[0].type.name}
                     />
                   </div>
-
-                  <div className="pokemon_card-type_name">
-                    {pokemonMetaData.types[0].type.name}
-                  </div>
                 </div>
+                // <div
+                //   className={`pokemon_card_type ${pokemonCardTypeIconClassName(
+                //     pokemonMetaData.types[0].type.name
+                //   )}`}
+                // >
+                //   <div className="pokemon_card_icon_image">
+                //     <img
+                //       src={pokemonCardTypeIconPng(
+                //         pokemonMetaData.types[0].type.name
+                //       )}
+                //       alt={pokemonMetaData.types[0].type.name}
+                //     />
+                //   </div>
+
+                //   <div className="pokemon_card-type_name">
+                //     {pokemonMetaData.types[0].type.name}
+                //   </div>
+                // </div>
               )}
             </div>
           </div>
