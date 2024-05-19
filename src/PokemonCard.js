@@ -20,12 +20,15 @@ import rockIcon from "./type-icons/rock.png";
 import steelIcon from "./type-icons/steel.png";
 import waterIcon from "./type-icons/water.png";
 
-const PokemonCard = ({ index }) => {
+const PokemonCard = ({ index, viewDetailAnalog }) => {
   const [pokemonMetaData, setPokemonMetaData] = useState({});
-  console.log(index);
+  const [pokemonSpecieData, setPokemonSpecieData] = useState({});
+
   // const imagesrc = "https://img.pokemondb.net/sprites/home/normal/"; // to fetch pokemon image
   const imagesrc = "https://www.serebii.net/scarletviolet/pokemon/new/small/";
   const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/";
+  const API_URL_SPECIES = "https://pokeapi.co/api/v2/pokemon-species/";
+
   const gifsrc = "https://projectpokemon.org/images/normal-sprite/";
   // const searchPokemonMetaData = async () => {
   //   //to fetch more individual pokemon information
@@ -38,11 +41,17 @@ const PokemonCard = ({ index }) => {
     //to fetch more individual pokemon information
     console.log(`${API_URL_INITIAL}${index}`);
     const response = await fetch(`${API_URL_INITIAL}${index}`);
+    const response_specie = await fetch(`${API_URL_SPECIES}${index}`);
+
     // const response1 = await fetch(`https://pokeapi.co/api/v2/type/${index}`);
     // const data1 = await response1.json();
     const data = await response.json();
+    const data_specie = await response_specie.json();
+
     setPokemonMetaData(data);
-    console.log(pokemonMetaData);
+    setPokemonSpecieData(data_specie);
+
+    // console.log(pokemonSpecieData);
     // console.log(data1);
   };
   const formatPokemonIdToFourDigits = (number) =>
@@ -91,6 +100,20 @@ const PokemonCard = ({ index }) => {
     "pokemon_card_type_" + pokemonType + "-icon";
   const pokemonCardTypeIconPng = (pokemonType) => typeIcons[pokemonType];
 
+  const showPokemonDetailAnalog = (
+    viewPokemonCards,
+    pokemonId,
+    pokemonMetaData1,
+    pokemonSpecieData
+  ) => {
+    viewDetailAnalog(
+      viewPokemonCards,
+      pokemonId,
+      pokemonMetaData1,
+      pokemonSpecieData
+    );
+  };
+
   useEffect(() => {
     searchPokemonMetaData();
   }, []);
@@ -98,10 +121,18 @@ const PokemonCard = ({ index }) => {
   return (
     <>
       {pokemonMetaData.name ? (
-        <div
+        <button
           className={`pokemon_card_border ${pokemonCardBorderTypeClassName(
             pokemonMetaData.types[0].type.name
           )}`}
+          onClick={() => {
+            showPokemonDetailAnalog(
+              false,
+              pokemonMetaData.id,
+              pokemonMetaData,
+              pokemonSpecieData
+            );
+          }}
         >
           <div className={`pokemon_card`}>
             <div className="pokemon_card_image-section">
@@ -264,7 +295,7 @@ const PokemonCard = ({ index }) => {
               )}
             </div>
           </div>
-        </div>
+        </button>
       ) : (
         <p>Loading...</p>
       )}

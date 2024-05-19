@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import PokemonCard from "./PokemonCard";
+import PokemonDetailCardTop from "./PokemonDetailCardTop";
 import SidebarGenBlock from "./SidebarGenBlock";
+import SidebarPokemonBlock from "./SidebarPokemonBlock";
 
 const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=";
 
@@ -85,16 +87,34 @@ const App = () => {
       name: "Generation IX",
     },
   ];
-  //   console.log(pokemonGenerations.gen1.description);
+
   const [pokemonPageCounter, setPokemonPageCounter] = useState(0);
   const [selectedPokemonGeneration, setSelectedPokemonGeneration] = useState(0);
+
+  const [viewPokemonCards, setViewPokemonCards] = useState(true);
+  const [targetPokemon, setTargetPokemon] = useState();
+  const [targetPokemonMetadata1, setTargetPokemonMetadata1] = useState();
+  const [targetPokemonSpeciedata1, setTargetPokemonSpeciedata1] = useState();
+
   const cardsPerPage = 32;
   const totalPages = Math.ceil(
     pokemonGenerations[selectedPokemonGeneration].total / cardsPerPage
   ); // Assuming you have 1025 Pokemon
 
-  const handlePageSelect = (event) => {
-    setPokemonPageCounter(Number(event.target.value));
+  //   const handlePageSelect = (event) => {
+  //     setPokemonPageCounter(Number(event.target.value));
+  //   };
+
+  const viewPokemonDetailAnalog = (
+    viewPokemonCards,
+    pokemonId,
+    pokemonMetaData1,
+    pokemonSpecieData
+  ) => {
+    setViewPokemonCards(viewPokemonCards);
+    setTargetPokemon(pokemonId);
+    setTargetPokemonMetadata1(pokemonMetaData1);
+    setTargetPokemonSpeciedata1(pokemonSpecieData);
   };
 
   const handleSelectGeneration = (generation) => {
@@ -120,59 +140,121 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="sidebar">
-        {pokemonGenerations.map((generation, index) => (
-          <SidebarGenBlock
-            key={index}
-            generation={generation}
-            onClick={() => handleSelectGeneration(index)}
-          />
-        ))}
-      </div>
-      <div className="container">
-        <div className="pokedex_title_row">
-          <div className="pokedex_title_container">
-            <h1 className="pokedex_title">
-              {pokemonGenerations[selectedPokemonGeneration].description}
-            </h1>
-            <div className="pokedex_title_id_container">
-              <div className="pokedex_title_id-start">
-                N°
-                {formatPokemonIdToFourDigits(
-                  pokemonGenerations[selectedPokemonGeneration].start
-                )}
-              </div>
-              -
-              <div className="pokedex_title_id-end">
-                N°
-                {formatPokemonIdToFourDigits(
-                  pokemonGenerations[selectedPokemonGeneration].end
-                )}
+      {viewPokemonCards ? (
+        <>
+          <div className="sidebar">
+            {pokemonGenerations.map((generation, index) => (
+              <SidebarGenBlock
+                key={index}
+                generation={generation}
+                onClick={() => handleSelectGeneration(index)}
+                className={
+                  selectedPokemonGeneration == index
+                    ? "sidebarblock-active"
+                    : ""
+                }
+              />
+            ))}
+          </div>
+          <div className="container">
+            <div className="pokedex_title_row">
+              <div className="pokedex_title_container">
+                <h1 className="pokedex_title">
+                  {pokemonGenerations[selectedPokemonGeneration].description}
+                </h1>
+                <div className="pokedex_title_id_container">
+                  <div className="pokedex_title_id-start">
+                    N°
+                    {formatPokemonIdToFourDigits(
+                      pokemonGenerations[selectedPokemonGeneration].start
+                    )}
+                  </div>
+                  -
+                  <div className="pokedex_title_id-end">
+                    N°
+                    {formatPokemonIdToFourDigits(
+                      pokemonGenerations[selectedPokemonGeneration].end
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
-        <div className="pokedex_container">
-          {Array.from({ length: cardsPerPage }, (_, index) => {
-            const cardIndex = startIndex + index; // +1 because Pokedex starts from 1
-            return cardIndex <=
-              pokemonGenerations[selectedPokemonGeneration].end ? ( // Ensure we do not exceed the total number of Pokemon
-              <PokemonCard key={cardIndex} index={cardIndex} />
-            ) : null;
-          })}
-        </div>
-        <div className="pagination_container">
-          <button onClick={updateToPreviousPage}>-</button>
-          <select value={pokemonPageCounter} onChange={handlePageSelect}>
+            <div className="pokedex_container">
+              {Array.from({ length: cardsPerPage }, (_, index) => {
+                const cardIndex = startIndex + index; // +1 because Pokedex starts from 1
+                return cardIndex <=
+                  pokemonGenerations[selectedPokemonGeneration].end ? ( // Ensure we do not exceed the total number of Pokemon
+                  <PokemonCard
+                    key={cardIndex}
+                    index={cardIndex}
+                    viewDetailAnalog={viewPokemonDetailAnalog}
+                  />
+                ) : null;
+              })}
+            </div>
+            <div className="pagination_container">
+              {pokemonPageCounter !== 0 ? (
+                <button
+                  className="pagination_button"
+                  onClick={updateToPreviousPage}
+                >
+                  {" "}
+                  &lt; Previous{" "}
+                </button>
+              ) : (
+                ""
+              )}
+              {/* <select value={pokemonPageCounter} onChange={handlePageSelect}>
             {Array.from({ length: totalPages }, (_, index) => (
               <option key={index} value={index}>
                 Page {index + 1}
               </option>
             ))}
-          </select>
-          <button onClick={updateToNextPage}>+</button>
-        </div>
-      </div>
+          </select> */}
+              <div className="pagination">
+                {Array.from({ length: totalPages }, (_, index) => (
+                  <button
+                    key={index}
+                    className={`page-item ${
+                      index === pokemonPageCounter ? "active" : ""
+                    }`}
+                    onClick={() => setPokemonPageCounter(index)}
+                  >
+                    {index + 1}
+                  </button>
+                ))}
+              </div>
+              <button className="pagination_button" onClick={updateToNextPage}>
+                Next &gt;
+              </button>
+            </div>
+          </div>
+        </>
+      ) : (
+        <>
+          <div className="sidebar">
+            {Array.from(
+              {
+                length: pokemonGenerations[selectedPokemonGeneration].total,
+              },
+              (_, index) => (
+                <SidebarPokemonBlock
+                  index={
+                    pokemonGenerations[selectedPokemonGeneration].start + index
+                  }
+                />
+              )
+            )}
+          </div>
+          <div className="container">
+            <PokemonDetailCardTop
+              pokemonId={targetPokemon}
+              pokemonMeta1={targetPokemonMetadata1}
+              pokemonSpecieData={targetPokemonSpeciedata1}
+            />
+          </div>
+        </>
+      )}
     </div>
   );
 };

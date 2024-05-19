@@ -10,7 +10,7 @@ import gen7Image from "./assets/gen7.png";
 import gen8Image from "./assets/gen8.png";
 import gen9Image from "./assets/gen9.png";
 
-const SidebarGenBlock = ({ generation, onClick }) => {
+const SidebarGenBlock = ({ generation, onClick, className }) => {
   const generationImage = {
     1: gen1Image,
     2: gen2Image,
@@ -29,7 +29,7 @@ const SidebarGenBlock = ({ generation, onClick }) => {
   const formatPokemonIdToFourDigits = (number) =>
     number.toString().padStart(4, "0");
   return (
-    <div className="sidebar_block" onClick={onClick}>
+    <div className={`${className} sidebar_block`} onClick={onClick}>
       <div className="sidebar_block_image-container">
         <img
           src={`${pokemonGenerationImage(generation.generation)}`}

@@ -1,0 +1,95 @@
+.pokemonDetailCard_top {
+  position: relative;
+  display: flex;
+}
+
+.pokemonDetailCard_image {
+  width: 32rem;
+  height: 32rem;
+  z-index: 2;
+  position: relative;
+}
+
+.pokemonDetailCard_image-section {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%) translateY(20%);
+}
+
+.pokemonDetailCard_pokeball-background {
+  position: absolute;
+  transform: translate(-50%, -60%);
+  left: 50%;
+  z-index: 1;
+}
+
+.pokemonDetailCard_pokeball-background svg {
+  height: 13rem;
+  width: 38rem;
+}
+
+.pokemonDetailCard_info-left {
+  margin-left: 2.5rem;
+  margin-top: 2rem;
+}
+.pokemonDetailCard_id {
+  color: #edd53f;
+  opacity: 0.5;
+  font-family: "Oxanium-Medium";
+  font-size: 3.2rem;
+}
+.pokemonDetailCard_name {
+  font-family: "Oxanium-ExtraBold";
+  font-size: 10rem;
+  color: #ffffff;
+  text-transform: uppercase;
+  line-height: 1.2;
+  letter-spacing: 1.25px;
+}
+.pokemonDetailCard_family {
+  font-family: "Oxanium-Medium";
+  font-size: 1.8rem;
+  color: #ffffff;
+  opacity: 0.5;
+}
+
+.pokemonDetailCard_types-container {
+  margin: 1rem;
+  display: flex;
+}
+.pokemonDetailCard_types {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 11rem;
+  height: 3rem;
+  border-radius: 25px;
+}
+.pokemonDetailCard_types:first-child {
+  margin-right: 1rem;
+}
+.pokemonDetailCard-type_name {
+  font-family: Avenir;
+  color: #ffffff;
+  font-size: 1.2rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  padding: 0.5rem;
+}
+
+.pokemonDetailCard_info-title {
+  font-family: "Oxanium-SemiBold";
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-top: 2.5rem;
+}
+
+.pokemonDetailCard_pokedex-entry {
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-family: "Oxanium-Regular";
+  width: 30rem;
+  padding: 1rem 0;
+  letter-spacing: 0.1rem;
+  line-height: 1.5;
+}

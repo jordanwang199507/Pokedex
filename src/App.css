@@ -16,7 +16,8 @@ html {
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: rgb(0, 0, 0, 0.4);
+  /* background: rgb(0, 0, 0, 0.4); */
+  background: #252530;
   border: 2px solid transparent;
   background-clip: content-box; /* THIS IS IMPORTANT */
 }
@@ -24,6 +25,7 @@ html {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #edd63f6c;
+  /* background: #252530; */
   border-radius: 5px;
 }
 
@@ -79,17 +81,19 @@ html {
 .sidebar {
   grid-column: sidebar-start / sidebar-end;
   min-height: 100%;
+  max-height: 104.2rem;
   /* max-height: 100rem; */
   height: auto;
   overflow-y: auto; /* Enables vertical scrolling when content exceeds the container's height */
   display: flex;
   flex-direction: column;
-  padding: 1rem 0;
+  /* padding: rem 0; */
 }
 
 .container {
   grid-column: center-start / center-end;
   padding-left: 2rem;
+  height: 100vh;
   /* display: grid;
   grid-template-rows:
     [row-1-start]15vh [row-1-end row-2-start] minmax(6rem, 5vh)
@@ -127,15 +131,72 @@ html {
 }
 .pokedex_container {
   /* grid-row: row-3-start / row-3-end; */
-  flex-direction: row;
+  /* flex-direction: row;
   display: flex;
   flex-wrap: wrap;
   column-gap: 2.5rem;
   row-gap: 3rem;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 2.5rem;
+  row-gap: 3rem;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 1200px; /* Maximum width of the container */
+  width: 100%; /* Adjust width as needed */
+  padding-left: 2rem;
 }
 
+.pagination_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 0;
+}
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; /* Spacing between buttons */
+  justify-content: center; /* Center the pagination buttons */
+  padding: 20px;
+}
+.pagination_button {
+  font-family: "Oxanium-ExtraBold";
+  color: white;
+  background-color: #252530;
+  text-transform: uppercase;
+  transition: all 0.2s ease-out;
+  background-color: #292f3f;
+  height: 5rem;
+  padding: 0 2rem;
+  border-radius: 0.5rem;
+  cursor: pointer;
+}
+.pagination_button:hover {
+  color: #edd53f;
+}
+.page-item {
+  font-family: "Oxanium-ExtraBold";
+  font-size: 1.8rem;
+  background: #252530;
+  padding: 8px 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  color: #edd53f;
+  border-radius: 0.5rem;
+}
+
+.page-item:hover {
+  background-color: #292f3f;
+}
+
+.page-item.active {
+  background-color: #d94256;
+  color: white;
+}
 /* 
 @media (max-width: 480px) {
   .container {
