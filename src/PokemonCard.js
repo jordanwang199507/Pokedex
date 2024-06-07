@@ -39,7 +39,6 @@ const PokemonCard = ({ index, viewDetailAnalog }) => {
   // };
   const searchPokemonMetaData = async () => {
     //to fetch more individual pokemon information
-    console.log(`${API_URL_INITIAL}${index}`);
     const response = await fetch(`${API_URL_INITIAL}${index}`);
     const response_specie = await fetch(`${API_URL_SPECIES}${index}`);
 

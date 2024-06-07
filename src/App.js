@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import "./App.css";
 import PokemonCard from "./PokemonCard";
 import PokemonDetailCardTop from "./PokemonDetailCardTop";
+import PokemonDetailCardMiddle from "./PokemonDetailCardMiddle";
 import SidebarGenBlock from "./SidebarGenBlock";
 import SidebarPokemonBlock from "./SidebarPokemonBlock";
 
@@ -95,12 +96,34 @@ const App = () => {
   const [targetPokemon, setTargetPokemon] = useState();
   const [targetPokemonMetadata1, setTargetPokemonMetadata1] = useState();
   const [targetPokemonSpeciedata1, setTargetPokemonSpeciedata1] = useState();
+  const [pokemonTypeData, setPokemonTypeData] = useState({});
 
   const cardsPerPage = 32;
   const totalPages = Math.ceil(
     pokemonGenerations[selectedPokemonGeneration].total / cardsPerPage
   ); // Assuming you have 1025 Pokemon
 
+  const API_URL_TYPE = "https://pokeapi.co/api/v2/type/";
+
+  const searchTypesData = async (index) => {
+    const response = await fetch(`${API_URL_TYPE}${index}`);
+    const data = await response.json();
+    return data;
+  };
+
+  useEffect(() => {
+    const fetchAllTypesData = async () => {
+      const allData = {};
+      for (let i = 1; i <= 18; i++) {
+        const data = await searchTypesData(i);
+        allData[data.name] = data;
+      }
+      setPokemonTypeData(allData);
+      console.log(allData); // Logging the fetched data after the state update
+    };
+
+    fetchAllTypesData();
+  }, []);
   //   const handlePageSelect = (event) => {
   //     setPokemonPageCounter(Number(event.target.value));
   //   };
@@ -157,6 +180,10 @@ const App = () => {
             ))}
           </div>
           <div className="container">
+            <div id="outer-circle">
+              <div id="inner-circle"></div>
+            </div>
+
             <div className="pokedex_title_row">
               <div className="pokedex_title_container">
                 <h1 className="pokedex_title">
@@ -195,11 +222,12 @@ const App = () => {
             <div className="pagination_container">
               {pokemonPageCounter !== 0 ? (
                 <button
-                  className="pagination_button"
+                  className="pagination_button_outter previous"
                   onClick={updateToPreviousPage}
                 >
-                  {" "}
-                  &lt; Previous{" "}
+                  <div className="pagination_button_inner previous">
+                    &lt; Prev.
+                  </div>
                 </button>
               ) : (
                 ""
@@ -224,8 +252,11 @@ const App = () => {
                   </button>
                 ))}
               </div>
-              <button className="pagination_button" onClick={updateToNextPage}>
-                Next &gt;
+              <button
+                className="pagination_button_outter"
+                onClick={updateToNextPage}
+              >
+                <div className="pagination_button_inner">Next &gt;</div>
               </button>
             </div>
           </div>
@@ -242,6 +273,7 @@ const App = () => {
                   index={
                     pokemonGenerations[selectedPokemonGeneration].start + index
                   }
+                  viewPokemonDetailAnalog={viewPokemonDetailAnalog}
                 />
               )
             )}
@@ -251,6 +283,12 @@ const App = () => {
               pokemonId={targetPokemon}
               pokemonMeta1={targetPokemonMetadata1}
               pokemonSpecieData={targetPokemonSpeciedata1}
+            />
+            <PokemonDetailCardMiddle
+              pokemonId={targetPokemon}
+              pokemonMeta1={targetPokemonMetadata1}
+              pokemonSpecieData={targetPokemonSpeciedata1}
+              pokemonTypeData={pokemonTypeData}
             />
           </div>
         </>

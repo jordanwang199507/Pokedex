@@ -1,0 +1,34 @@
+.pokemonDetailCardMiddle_damage-innercontainer {
+  background-color: #676c78;
+  padding: 0.5rem;
+  border-radius: 0.75rem;
+  min-width: 12rem;
+  width: 25%;
+}
+.pokemonDetailCardMiddle_damage-innercontainer:not(:last-child) {
+  margin-right: 0.5rem;
+}
+.pokemonDetailCardMiddle_damage-title-container {
+  background-color: #252530;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+.pokemonDetailCardMiddle_damage-secondary-title {
+  color: #ffffff;
+  text-transform: uppercase;
+  font-family: "Oxanium-SemiBold";
+  padding: 0.5rem;
+  height: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.pokemonDetailCardMiddle_damage-types-container {
+  display: flex;
+  padding: 0.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.pokemonDetailCardMiddle_damage-types-container .pokemon_card_type-icon {
+  margin: 0.15rem;
+}

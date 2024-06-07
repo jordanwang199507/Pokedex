@@ -1,6 +1,7 @@
-.pokemonDetailCard_top {
+.pokemonDetailCardTop {
   position: relative;
   display: flex;
+  justify-content: space-between;
 }
 
 .pokemonDetailCard_image {
@@ -8,6 +9,7 @@
   height: 32rem;
   z-index: 2;
   position: relative;
+  filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.48));
 }
 
 .pokemonDetailCard_image-section {
@@ -44,17 +46,19 @@
   color: #ffffff;
   text-transform: uppercase;
   line-height: 1.2;
-  letter-spacing: 1.25px;
+  letter-spacing: 0.25rem;
+  text-shadow: 0 0 3px black;
 }
 .pokemonDetailCard_family {
   font-family: "Oxanium-Medium";
   font-size: 1.8rem;
   color: #ffffff;
   opacity: 0.5;
+  letter-spacing: 0.12rem;
 }
 
 .pokemonDetailCard_types-container {
-  margin: 1rem;
+  margin: 1rem 0rem;
   display: flex;
 }
 .pokemonDetailCard_types {
@@ -81,15 +85,74 @@
   font-family: "Oxanium-SemiBold";
   font-size: 1.8rem;
   color: #ffffff;
-  margin-top: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+}
+.pokemonDetailCard_info-title.pokedex-entry {
+  margin-top: 2rem;
+}
+.pokemonDetailCard_info-abilities-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+.pokemonDetailCard_info-ability {
+  padding: 0.75rem 1.5rem;
+  font-family: "Oxanium-SemiBold";
+  text-transform: capitalize;
+  border-radius: 10rem;
+  margin-top: 1rem;
+  margin-right: 1rem;
+  font-size: 1rem;
+  color: #292f3f;
+}
+.pokemonDetailCard_info-ability.yellow-background {
+  background: #edd53f;
+}
+.pokemonDetailCard_info-ability.white-background {
+  background: #ffffff;
+}
+.pokemonDetailCard_info-ability:last-child {
+  margin-right: 0rem;
+  max-width: 10rem;
+  text-align: center;
 }
 
 .pokemonDetailCard_pokedex-entry {
   color: #ffffff;
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   font-family: "Oxanium-Regular";
   width: 30rem;
   padding: 1rem 0;
   letter-spacing: 0.1rem;
   line-height: 1.5;
+}
+
+.pokemonDetailCard_info-right {
+  padding: 1rem 1.5rem;
+  width: 35%;
+  min-width: 30rem;
+}
+
+.pokemonDetailCard_info-container {
+  display: flex;
+  justify-content: space-between;
+  color: #ffffff;
+  margin: 3rem 1.5rem;
+}
+.pokemonDetailCard_info-container:first-child {
+  flex-direction: column;
+}
+.pokemonDetailCard_info-entry {
+  font-family: "Oxanium-Bold";
+  font-size: 1.8rem;
+  text-align: right;
+  letter-spacing: 0.08rem;
+  margin-left: 0.5rem;
+}
+.pokemonDetailCard_info-entry span {
+  font-family: "Oxanium-SemiBold";
+  font-size: 1.4rem;
+  text-transform: uppercase;
+  padding-left: 0.5rem;
+  letter-spacing: 0.12rem;
 }

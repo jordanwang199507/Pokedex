@@ -62,6 +62,26 @@ html {
   font-family: "Oxanium-SemiBold";
   src: URL("/public/fonts/Oxanium-SemiBold.ttf") format("truetype");
 }
+#outer-circle {
+  margin-top: 2rem;
+  width: 5rem;
+  height: 2.5rem;
+  background-color: #48abe0;
+  border-radius: 4rem 4rem 0 0;
+  position: relative;
+  transform: rotate(90deg);
+}
+#inner-circle {
+  position: absolute;
+  background: #a9aaab;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+  border: 0.5rem solid #252530;
+  transform: translate(-50%, -18%);
+  top: 50%;
+  left: 50%;
+}
 
 .App {
   width: 100%;
@@ -93,7 +113,6 @@ html {
 .container {
   grid-column: center-start / center-end;
   padding-left: 2rem;
-  height: 100vh;
   /* display: grid;
   grid-template-rows:
     [row-1-start]15vh [row-1-end row-2-start] minmax(6rem, 5vh)
@@ -163,21 +182,49 @@ html {
   justify-content: center; /* Center the pagination buttons */
   padding: 20px;
 }
-.pagination_button {
+.pagination_button_outter {
   font-family: "Oxanium-ExtraBold";
-  color: white;
-  background-color: #252530;
+  color: #252530;
+  /* background-color: #252530; */
   text-transform: uppercase;
   transition: all 0.2s ease-out;
-  background-color: #292f3f;
-  height: 5rem;
-  padding: 0 2rem;
-  border-radius: 0.5rem;
+  /* background-color: #292f3f; */
+  /* padding: 0 2rem; */
+  /* border-radius: 0.5rem; */
   cursor: pointer;
+  /* height: 5rem; */
+  width: 10rem;
+  height: 5.5rem;
+  background-color: rgba(237, 213, 63, 0.5);
+  border-radius: 7rem 7rem 0 0;
+  position: relative;
+  transform: rotate(90deg);
 }
-.pagination_button:hover {
+.pagination_button_outter.previous {
+  transform: rotate(-90deg);
+}
+.pagination_button_inner {
+  position: absolute;
+  background: #a9aaab;
+  width: 5.5rem;
+  height: 5.5rem;
+  border-radius: 50%;
+  border: 0.5rem solid #252530;
+  transform: translate(-50%, -13%) rotate(270deg);
+  top: 50%;
+  left: 50%;
+  font-size: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+.pagination_button_inner.previous {
+  transform: translate(-50%, -13%) rotate(-270deg);
+}
+/* .pagination_button_outter:hover {
   color: #edd53f;
-}
+} */
 .page-item {
   font-family: "Oxanium-ExtraBold";
   font-size: 1.8rem;

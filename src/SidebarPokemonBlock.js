@@ -19,26 +19,39 @@ import rockIcon from "./type-icons/rock.png";
 import steelIcon from "./type-icons/steel.png";
 import waterIcon from "./type-icons/water.png";
 
-const SidebarPokemonBlock = ({ index }) => {
+const SidebarPokemonBlock = ({ index, viewPokemonDetailAnalog }) => {
   const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/";
+  const API_URL_SPECIES = "https://pokeapi.co/api/v2/pokemon-species/";
   const imagesrc = "https://www.serebii.net/scarletviolet/pokemon/new/small/";
 
   const [pokemonMetaData, setPokemonMetaData] = useState({});
+  const [pokemonSpecieData, setPokemonSpecieData] = useState({});
+
   const searchPokemonMetaData = async () => {
-    console.log(`${API_URL_INITIAL}${index}`);
     const response = await fetch(`${API_URL_INITIAL}${index}`);
     const data = await response.json();
     setPokemonMetaData(data);
   };
+
+  const searchPokemonSpecieData = async () => {
+    const response_specie = await fetch(`${API_URL_SPECIES}${index}`);
+    const data = await response_specie.json();
+    return data; // Return the fetched species data
+  };
+
   const pokemonCardFormatIDforImage = (pokemonId) =>
     pokemonId < 999
       ? pokemonId.toString().padStart(3, "0")
       : pokemonId.toString();
+
   const formatPokemonIdToFourDigits = (number) =>
     number.toString().padStart(4, "0");
+
   const pokemonCardTypeIconClassName = (pokemonType) =>
     "pokemon_card_type_" + pokemonType + "-icon";
+
   const pokemonCardTypeIconPng = (pokemonType) => typeIcons[pokemonType];
+
   const typeIcons = {
     bug: bugIcon,
     dark: darkIcon,
@@ -60,15 +73,30 @@ const SidebarPokemonBlock = ({ index }) => {
     water: waterIcon,
   };
 
+  const showPokemonDetailAnalog = async () => {
+    const specieData = await searchPokemonSpecieData(); // Fetch species data
+    setPokemonSpecieData(specieData); // Set species data in state
+    viewPokemonDetailAnalog(
+      false,
+      pokemonMetaData.id,
+      pokemonMetaData,
+      specieData
+    ); // Update view only after species data is fetched
+  };
+
   useEffect(() => {
     searchPokemonMetaData();
-    console.log(pokemonMetaData);
   }, []);
 
   return (
     <>
       {pokemonMetaData.name ? (
-        <div className="sidebar_pokemon">
+        <div
+          className="sidebar_pokemon"
+          onClick={() => {
+            showPokemonDetailAnalog();
+          }}
+        >
           <div className="sidebar_pokemon_left-container">
             {pokemonMetaData.id && (
               <img

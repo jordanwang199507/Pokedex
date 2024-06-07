@@ -1,0 +1,39 @@
+.pokemonDetailCardMiddle {
+  margin: 2.5rem;
+}
+.pokemonDetailCardMiddle_baseState-container {
+  border-radius: 1rem;
+  margin-bottom: 2rem;
+}
+
+.pokemonDetailCardMiddle_baseState_title {
+  font-family: "Oxanium-Bold";
+  font-size: 2.4rem;
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  word-spacing: 1.25px;
+}
+
+.pokemonDetailCardMiddle_damageFromOrTo-container {
+  border-radius: 1rem;
+}
+
+.pokemonDetailCardMiddle_damage-primary-title {
+  font-size: 2.4rem;
+  font-family: "Oxanium-Bold";
+  color: white;
+  text-transform: uppercase;
+  letter-spacing: 0.35px;
+  word-spacing: 1.25px;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+.pokemonDetailCardMiddle_damage-primary-title span {
+  color: #edd53f;
+  font-size: 1.4rem;
+}
+.pokemonDetailCardMiddle_allDamage-container {
+  display: flex;
+  width: 100%;
+}
