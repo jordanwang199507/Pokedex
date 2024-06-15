@@ -19,21 +19,36 @@ import rockIcon from "./type-icons/rock.png";
 import steelIcon from "./type-icons/steel.png";
 import waterIcon from "./type-icons/water.png";
 
-const SidebarPokemonBlock = ({ index, viewPokemonDetailAnalog }) => {
+const SidebarPokemonBlock = ({
+  index,
+  target,
+  viewPokemonDetailAnalog,
+  previousAndNextPokemonDetailAnalog,
+}) => {
   const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/";
   const API_URL_SPECIES = "https://pokeapi.co/api/v2/pokemon-species/";
   const imagesrc = "https://www.serebii.net/scarletviolet/pokemon/new/small/";
-
   const [pokemonMetaData, setPokemonMetaData] = useState({});
   const [pokemonSpecieData, setPokemonSpecieData] = useState({});
-
-  const searchPokemonMetaData = async () => {
+  const [previousPokemonMetaData, setPreviousPokemonMetaData] = useState({});
+  const [previousPokemonSpecieData, setPreviousPokemonSpecieData] = useState(
+    {}
+  );
+  const [nextPokemonMetaData, setNextPokemonMetaData] = useState({});
+  const [nextPokemonSpecieData, setNextPokemonSpecieData] = useState({});
+  const searchPokemonMetaData = async (index, whichPokemon) => {
     const response = await fetch(`${API_URL_INITIAL}${index}`);
     const data = await response.json();
-    setPokemonMetaData(data);
+    if (whichPokemon === "current") {
+      setPokemonMetaData(data);
+    } else if (whichPokemon === "previous") {
+      setPreviousPokemonMetaData(data);
+    } else {
+      setNextPokemonMetaData(data);
+    }
   };
 
-  const searchPokemonSpecieData = async () => {
+  const searchPokemonSpecieData = async (index) => {
     const response_specie = await fetch(`${API_URL_SPECIES}${index}`);
     const data = await response_specie.json();
     return data; // Return the fetched species data
@@ -74,27 +89,52 @@ const SidebarPokemonBlock = ({ index, viewPokemonDetailAnalog }) => {
   };
 
   const showPokemonDetailAnalog = async () => {
-    const specieData = await searchPokemonSpecieData(); // Fetch species data
-    setPokemonSpecieData(specieData); // Set species data in state
+    let specieData = {};
+    let previousSpecieData = {};
+    let nextSpecieData = {};
+
+    if (index === 1) {
+      // If index is 1, only fetch data for the current and next Pokémon
+      specieData = await searchPokemonSpecieData(index);
+      nextSpecieData = await searchPokemonSpecieData(index + 1);
+    } else {
+      // For other indices, fetch data for the current, previous, and next Pokémon
+      specieData = await searchPokemonSpecieData(index);
+      previousSpecieData = await searchPokemonSpecieData(index - 1);
+      nextSpecieData = await searchPokemonSpecieData(index + 1);
+    }
+
     viewPokemonDetailAnalog(
       false,
       pokemonMetaData.id,
       pokemonMetaData,
-      specieData
-    ); // Update view only after species data is fetched
+      specieData,
+      index === 1 ? null : index - 1,
+      index === 1 ? {} : previousPokemonMetaData,
+      index === 1 ? {} : previousSpecieData,
+      index + 1,
+      nextPokemonMetaData,
+      nextSpecieData
+    );
   };
 
   useEffect(() => {
-    searchPokemonMetaData();
-  }, []);
-
+    searchPokemonMetaData(index, "current");
+    if (index >= 1) {
+      searchPokemonMetaData(index - 1, "previous");
+    }
+    searchPokemonMetaData(index + 1, "next");
+  }, [index]);
   return (
     <>
       {pokemonMetaData.name ? (
         <div
-          className="sidebar_pokemon"
+          className={`sidebar_pokemon ${
+            index === target ? "active" : "in-active"
+          }`}
           onClick={() => {
             showPokemonDetailAnalog();
+            // setPreviousAndNextPokemonDetailAnalog();
           }}
         >
           <div className="sidebar_pokemon_left-container">

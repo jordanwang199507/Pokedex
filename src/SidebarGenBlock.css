@@ -10,6 +10,7 @@
   justify-content: end;
   padding: 0 1rem;
   cursor: pointer;
+  transition: all 0.2s linear;
 }
 .sidebar_block:after {
   content: "";
@@ -96,4 +97,12 @@
   margin-top: -1rem;
   width: 16rem;
   transition: all 0.2s linear;
+}
+@media (max-width: 1225px) {
+  .sidebar_block_image-container img {
+    width: 12rem;
+  }
+  .sidebar_block:hover .sidebar_block_image-container img {
+    transform: scale(1.1) translateY(-0.3rem);
+  }
 }

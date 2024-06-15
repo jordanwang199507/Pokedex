@@ -13,6 +13,25 @@
   text-align: center;
   border-radius: 0.5rem;
 }
+.pokemonDetailCardMiddle_damage-title-container.super-effective {
+  background: #7c0000;
+}
+.pokemonDetailCardMiddle_damage-title-container.effective {
+  background: #a40000;
+}
+.pokemonDetailCardMiddle_damage-title-container.neutral {
+  background: #edc43f;
+}
+.pokemonDetailCardMiddle_damage-title-container.not-effective {
+  background: #73d217;
+}
+.pokemonDetailCardMiddle_damage-title-container.very-not {
+  background: #4e9a06;
+}
+.pokemonDetailCardMiddle_damage-title-container.no-effect {
+  background: #252530;
+}
+
 .pokemonDetailCardMiddle_damage-secondary-title {
   color: #ffffff;
   text-transform: uppercase;
@@ -22,6 +41,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  letter-spacing: 0.12rem;
 }
 .pokemonDetailCardMiddle_damage-types-container {
   display: flex;

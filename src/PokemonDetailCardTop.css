@@ -32,17 +32,16 @@
 
 .pokemonDetailCard_info-left {
   margin-left: 2.5rem;
-  margin-top: 2rem;
 }
 .pokemonDetailCard_id {
-  color: #edd53f;
-  opacity: 0.5;
+  color: #edc43f;
+  opacity: 0.8;
   font-family: "Oxanium-Medium";
   font-size: 3.2rem;
 }
 .pokemonDetailCard_name {
   font-family: "Oxanium-ExtraBold";
-  font-size: 10rem;
+  font-size: 9rem;
   color: #ffffff;
   text-transform: uppercase;
   line-height: 1.2;
@@ -106,14 +105,16 @@
   color: #292f3f;
 }
 .pokemonDetailCard_info-ability.yellow-background {
-  background: #edd53f;
+  background: #edc43f;
 }
 .pokemonDetailCard_info-ability.white-background {
   background: #ffffff;
 }
 .pokemonDetailCard_info-ability:last-child {
   margin-right: 0rem;
-  max-width: 10rem;
+  /* min-width: 12rem;
+  width: 10rem; */
+  width: fit-content;
   text-align: center;
 }
 
@@ -128,7 +129,7 @@
 }
 
 .pokemonDetailCard_info-right {
-  padding: 1rem 1.5rem;
+  padding: 0rem 1.5rem;
   width: 35%;
   min-width: 30rem;
 }
@@ -141,6 +142,7 @@
 }
 .pokemonDetailCard_info-container:first-child {
   flex-direction: column;
+  margin-top: 2rem;
 }
 .pokemonDetailCard_info-entry {
   font-family: "Oxanium-Bold";
@@ -155,4 +157,149 @@
   text-transform: uppercase;
   padding-left: 0.5rem;
   letter-spacing: 0.12rem;
+  font-size: inherit;
+}
+@media (max-width: 1100px) {
+  .pokemonDetailCardTop {
+    margin-top: 6.5rem;
+  }
+}
+@media (max-width: 1000px) {
+  .pokemonDetailCardTop {
+    flex-direction: column;
+  }
+  .pokemonDetailCard_info-left {
+    margin: 0rem 12.5rem 0 12.5rem;
+  }
+  .pokemonDetailCard_image-section {
+    position: absolute;
+    right: 5vw;
+    left: unset;
+    transform: unset;
+  }
+  .pokemonDetailCard_info-right {
+    width: unset;
+    margin: 1rem 12.5rem;
+    padding: 0rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+  .pokemonDetailCard_info-container {
+    margin: 0.75rem 0rem;
+    min-width: 45%;
+  }
+}
+@media (max-width: 900px) {
+  .pokemonDetailCard_info-title,
+  .pokemonDetailCard_info-entry {
+    font-size: 1.4rem;
+  }
+}
+@media (max-width: 850px) {
+  .pokemonDetailCard_info-left {
+    margin: 0rem 5.5rem 0 5.5rem;
+  }
+  .pokemonDetailCard_info-right {
+    margin: 1rem 5rem;
+  }
+}
+@media (max-width: 700px) {
+  .pokemonDetailCard_image-section {
+    right: 5vw;
+    top: 5vh;
+  }
+  .pokemonDetailCard_image {
+    width: 27rem;
+    height: 27rem;
+  }
+  .pokemonDetailCard_pokeball-background svg {
+    height: 10rem;
+    width: 25rem;
+  }
+  .pokemonDetailCard_types {
+    width: 8rem;
+    height: 2.5rem;
+  }
+  .pokemonDetailCard-type_name {
+    font-size: 1.1rem;
+  }
+  .pokemonDetailCard_name {
+    font-size: 12vw;
+  }
+  .pokemonDetailCard_id {
+    font-size: 5.5vw;
+  }
+  .pokemonDetailCard_info-container {
+    min-width: 48%;
+  }
+  .pokemonDetailCard_info-left {
+    margin: 0rem 3.5rem 0 3.5rem;
+  }
+  .pokemonDetailCard_info-right {
+    margin: 1rem 3.5rem;
+  }
+}
+
+@media (max-width: 550px) {
+  .pokemonDetailCard_id {
+    margin: 14rem 0rem 0rem 0rem;
+    z-index: 1000;
+    position: relative;
+    text-shadow: 0 0 3px black;
+  }
+  .pokemonDetailCard_name {
+    z-index: 1000;
+    position: relative;
+  }
+  .pokemonDetailCard_family {
+    margin: 0rem 0 1rem 0;
+    text-align: center;
+  }
+  .pokemonDetailCard_types-container {
+    display: flex;
+    justify-content: center;
+  }
+  .pokemonDetailCard_pokedex-entry {
+    width: 100%;
+  }
+  .pokemonDetailCard_image-section {
+    right: unset;
+    top: 0;
+    transform: translate(-50%, -30%);
+    left: 50%;
+  }
+  .pokemonDetailCard_info-right {
+    display: unset;
+  }
+  .pokemonDetailCard_info-container {
+    margin: 1rem 0;
+  }
+  .pokemonDetailCard_info-container:first-child {
+    margin-top: 1rem;
+    flex-direction: row;
+    align-items: center;
+  }
+  .pokemonDetailCard_info-title,
+  .pokemonDetailCard_info-entry {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 420px) {
+  .pokemonDetailCard_info-left {
+    margin: 0rem 2rem 0rem 2rem;
+  }
+  .pokemonDetailCard_info-right {
+    margin: 1rem 2rem;
+    min-width: unset;
+  }
+  .pokemonDetailCard_image {
+    width: 60vw;
+    height: 60vw;
+  }
+  .pokemonDetailCard_pokeball-background svg {
+    width: 60vw;
+  }
 }

@@ -162,8 +162,8 @@ const PokemonDetailCardMiddle = ({
     calculateDamageFromAndTo();
   }, [pokemonTypeData, pokemonMeta1]);
 
-  console.log(damageFrom); // Verify the updated damageFrom object
-  console.log(damageTo); // Verify the updated damageTo object
+  //   console.log(damageFrom); // Verify the updated damageFrom object
+  //   console.log(damageTo); // Verify the updated damageTo object
   return (
     <div className="pokemonDetailCardMiddle">
       <div className="pokemonDetailCardMiddle_baseState-container">

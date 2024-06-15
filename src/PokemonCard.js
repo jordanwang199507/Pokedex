@@ -23,40 +23,73 @@ import waterIcon from "./type-icons/water.png";
 const PokemonCard = ({ index, viewDetailAnalog }) => {
   const [pokemonMetaData, setPokemonMetaData] = useState({});
   const [pokemonSpecieData, setPokemonSpecieData] = useState({});
+  const [previousPokemonMetaData, setPreviousPokemonMetaData] = useState({});
+  const [previousPokemonSpecieData, setPreviousPokemonSpecieData] = useState(
+    {}
+  );
+  const [nextPokemonMetaData, setNextPokemonMetaData] = useState({});
+  const [nextPokemonSpecieData, setNextPokemonSpecieData] = useState({});
 
-  // const imagesrc = "https://img.pokemondb.net/sprites/home/normal/"; // to fetch pokemon image
   const imagesrc = "https://www.serebii.net/scarletviolet/pokemon/new/small/";
   const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/";
   const API_URL_SPECIES = "https://pokeapi.co/api/v2/pokemon-species/";
 
-  const gifsrc = "https://projectpokemon.org/images/normal-sprite/";
-  // const searchPokemonMetaData = async () => {
-  //   //to fetch more individual pokemon information
-  //   const response = await fetch(`${pokemon.url}`);
-  //   const data = await response.json();
-  //   setPokemonMetaData(data);
-  //   console.log(pokemonMetaData);
-  // };
-  const searchPokemonMetaData = async () => {
-    //to fetch more individual pokemon information
-    const response = await fetch(`${API_URL_INITIAL}${index}`);
-    const response_specie = await fetch(`${API_URL_SPECIES}${index}`);
-
-    // const response1 = await fetch(`https://pokeapi.co/api/v2/type/${index}`);
-    // const data1 = await response1.json();
-    const data = await response.json();
-    const data_specie = await response_specie.json();
-
-    setPokemonMetaData(data);
-    setPokemonSpecieData(data_specie);
-
-    // console.log(pokemonSpecieData);
-    // console.log(data1);
+  const fetchPokemonData = async (url) => {
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return await response.json();
+    } catch (error) {
+      console.error("Error fetching data:", error);
+      return null;
+    }
   };
+
+  const searchPokemonMetaData = async () => {
+    const urls = [
+      fetchPokemonData(`${API_URL_INITIAL}${index}`),
+      fetchPokemonData(`${API_URL_SPECIES}${index}`),
+    ];
+
+    if (index > 1) {
+      urls.push(fetchPokemonData(`${API_URL_INITIAL}${index - 1}`));
+      urls.push(fetchPokemonData(`${API_URL_SPECIES}${index - 1}`));
+    } else {
+      urls.push(null, null); // Push null for previous data when index is 1
+    }
+
+    urls.push(fetchPokemonData(`${API_URL_INITIAL}${index + 1}`));
+    urls.push(fetchPokemonData(`${API_URL_SPECIES}${index + 1}`));
+
+    const [
+      data,
+      specieData,
+      prevData,
+      prevSpecieData,
+      nextData,
+      nextSpecieData,
+    ] = await Promise.all(urls);
+
+    if (data && specieData && nextData && nextSpecieData) {
+      setPokemonMetaData(data);
+      setPokemonSpecieData(specieData);
+      setNextPokemonMetaData(nextData);
+      setNextPokemonSpecieData(nextSpecieData);
+
+      if (prevData && prevSpecieData) {
+        setPreviousPokemonMetaData(prevData);
+        setPreviousPokemonSpecieData(prevSpecieData);
+      } else {
+        setPreviousPokemonMetaData({});
+        setPreviousPokemonSpecieData({});
+      }
+    }
+  };
+
   const formatPokemonIdToFourDigits = (number) =>
     number.toString().padStart(4, "0");
-
-  const formatPokemonHeightWeight = (number) => number / 10;
 
   const capitalize = (str) => {
     if (!str) return "";
@@ -83,39 +116,53 @@ const PokemonCard = ({ index, viewDetailAnalog }) => {
     steel: steelIcon,
     water: waterIcon,
   };
+
   const pokemonCardFormatIDforImage = (pokemonId) =>
     pokemonId < 999
       ? pokemonId.toString().padStart(3, "0")
       : pokemonId.toString();
+
   const pokemonCardBorderTypeClassName = (pokemonType) =>
-    "pokemon_card_border_type_" + pokemonType;
+    `pokemon_card_border_type_${pokemonType}`;
   const pokemonCardPokeBallTypeClassName = (pokemonType) =>
-    "pokemon_card_pokeball_type_" + pokemonType;
+    `pokemon_card_pokeball_type_${pokemonType}`;
   const pokemonCardStatsTypeClassName = (pokemonType) =>
-    "pokemon_card_stats_type_" + pokemonType;
+    `pokemon_card_stats_type_${pokemonType}`;
   const pokemonCardStatsTopLeftBorder = (pokemonType) =>
-    "pokemon_card_stats-top_" + pokemonType;
+    `pokemon_card_stats-top_${pokemonType}`;
   const pokemonCardTypeIconClassName = (pokemonType) =>
-    "pokemon_card_type_" + pokemonType + "-icon";
+    `pokemon_card_type_${pokemonType}-icon`;
   const pokemonCardTypeIconPng = (pokemonType) => typeIcons[pokemonType];
 
   const showPokemonDetailAnalog = (
     viewPokemonCards,
     pokemonId,
     pokemonMetaData1,
-    pokemonSpecieData
+    pokemonSpecieData,
+    previousPokemonId,
+    previousPokemonMetaData1,
+    previousPokemonSpecieData,
+    nextPokemonId,
+    nextPokemonMetaData1,
+    nextPokemonSpecieData
   ) => {
     viewDetailAnalog(
       viewPokemonCards,
       pokemonId,
       pokemonMetaData1,
-      pokemonSpecieData
+      pokemonSpecieData,
+      previousPokemonId,
+      previousPokemonMetaData1,
+      previousPokemonSpecieData,
+      nextPokemonId,
+      nextPokemonMetaData1,
+      nextPokemonSpecieData
     );
   };
 
   useEffect(() => {
     searchPokemonMetaData();
-  }, []);
+  }, [index]);
 
   return (
     <>
@@ -129,11 +176,17 @@ const PokemonCard = ({ index, viewDetailAnalog }) => {
               false,
               pokemonMetaData.id,
               pokemonMetaData,
-              pokemonSpecieData
+              pokemonSpecieData,
+              previousPokemonMetaData.id,
+              previousPokemonMetaData,
+              previousPokemonSpecieData,
+              nextPokemonMetaData.id,
+              nextPokemonMetaData,
+              nextPokemonSpecieData
             );
           }}
         >
-          <div className={`pokemon_card`}>
+          <div className="pokemon_card">
             <div className="pokemon_card_image-section">
               <div className="pokemon_card_image-container">
                 <img
@@ -145,11 +198,6 @@ const PokemonCard = ({ index, viewDetailAnalog }) => {
                 />
               </div>
               <div className="pokemon_card_pokeball-background">
-                {/* <img
-                  src={pokeBall_under}
-                  alt={pokemonMetaData.name}
-                  className="pokemon_card_image"
-                /> */}
                 <PokeBallUnder
                   className={`${pokemonCardPokeBallTypeClassName(
                     pokemonMetaData.types[0].type.name
@@ -174,124 +222,23 @@ const PokemonCard = ({ index, viewDetailAnalog }) => {
                   {capitalize(pokemonMetaData.name)}
                 </h2>
               </div>
-              {/* <div className="pokemon_card_stats-bottom">
-                <div className="pokemon_card_height">
-                  <div className="pokemon_card_text-primary">Height</div>
-                  <div className="pokemon_card_text-secondary">
-                    {formatPokemonHeightWeight(pokemonMetaData.height)}{" "}
-                    <span>METER</span>
-                  </div>
-                </div>
-                <div className="pokemon_card_weight">
-                  <div className="pokemon_card_text-primary">Weight</div>
-                  <div className="pokemon_card_text-secondary">
-                    {formatPokemonHeightWeight(pokemonMetaData.weight)}{" "}
-                    <span>K.G.</span>
-                  </div>
-                </div>
-              </div> */}
             </div>
             <div className="pokemon_card_type-container">
-              {pokemonMetaData.types.length > 1 ? (
-                <>
-                  <div
-                    className={`pokemon_card_type-icon ${pokemonCardTypeIconClassName(
-                      pokemonMetaData.types[0].type.name
-                    )}`}
-                  >
-                    <div className="pokemon_card_icon_image">
-                      <img
-                        src={pokemonCardTypeIconPng(
-                          pokemonMetaData.types[0].type.name
-                        )}
-                        alt={pokemonMetaData.types[0].type.name}
-                      />
-                    </div>
-                  </div>
-                  <div
-                    className={`pokemon_card_type-icon ${pokemonCardTypeIconClassName(
-                      pokemonMetaData.types[1].type.name
-                    )}`}
-                  >
-                    <div className="pokemon_card_icon_image">
-                      <img
-                        src={pokemonCardTypeIconPng(
-                          pokemonMetaData.types[1].type.name
-                        )}
-                        alt={pokemonMetaData.types[1].type.name}
-                      />
-                    </div>
-                  </div>
-                  {/* <div
-                    className={`pokemon_card_type ${pokemonCardTypeIconClassName(
-                      pokemonMetaData.types[0].type.name
-                    )}`}
-                  >
-                    <div className="pokemon_card_icon_image">
-                      <img
-                        src={pokemonCardTypeIconPng(
-                          pokemonMetaData.types[0].type.name
-                        )}
-                        alt={pokemonMetaData.types[0].type.name}
-                      />
-                    </div>
-                    <div className="pokemon_card-type_name">
-                      {pokemonMetaData.types[0].type.name}
-                    </div>
-                  </div>
-                  <div
-                    className={`pokemon_card_type ${pokemonCardTypeIconClassName(
-                      pokemonMetaData.types[1].type.name
-                    )}`}
-                  >
-                    <div className="pokemon_card_icon_image">
-                      <img
-                        src={pokemonCardTypeIconPng(
-                          pokemonMetaData.types[1].type.name
-                        )}
-                        alt={pokemonMetaData.types[1].type.name}
-                      />
-                    </div>
-
-                    <div className="pokemon_card-type_name">
-                      {pokemonMetaData.types[1].type.name}
-                    </div>
-                  </div> */}
-                </>
-              ) : (
+              {pokemonMetaData.types.map((type) => (
                 <div
+                  key={type.type.name}
                   className={`pokemon_card_type-icon ${pokemonCardTypeIconClassName(
-                    pokemonMetaData.types[0].type.name
+                    type.type.name
                   )}`}
                 >
                   <div className="pokemon_card_icon_image">
                     <img
-                      src={pokemonCardTypeIconPng(
-                        pokemonMetaData.types[0].type.name
-                      )}
-                      alt={pokemonMetaData.types[0].type.name}
+                      src={pokemonCardTypeIconPng(type.type.name)}
+                      alt={type.type.name}
                     />
                   </div>
                 </div>
-                // <div
-                //   className={`pokemon_card_type ${pokemonCardTypeIconClassName(
-                //     pokemonMetaData.types[0].type.name
-                //   )}`}
-                // >
-                //   <div className="pokemon_card_icon_image">
-                //     <img
-                //       src={pokemonCardTypeIconPng(
-                //         pokemonMetaData.types[0].type.name
-                //       )}
-                //       alt={pokemonMetaData.types[0].type.name}
-                //     />
-                //   </div>
-
-                //   <div className="pokemon_card-type_name">
-                //     {pokemonMetaData.types[0].type.name}
-                //   </div>
-                // </div>
-              )}
+              ))}
             </div>
           </div>
         </button>

@@ -1,0 +1,121 @@
+.PokemonDetailCardToolBar {
+  width: 100%;
+  grid-column: center-start / center-end;
+  padding-top: 0.2rem;
+  padding-bottom: 0.5rem;
+  /* background-color: #282f40; */
+  /* background: linear-gradient(
+    180deg,
+    rgba(40, 47, 64, 0.8) 0%,
+    #252530 50%,
+    rgba(39, 42, 56, 0.9) 100%
+  ); */
+  background: linear-gradient(180deg, #252530 0%, rgba(40, 47, 64, 0.8) 100%);
+}
+.PokemonDetailCardToolBar-container {
+  margin: 0rem auto 0rem auto;
+  display: flex;
+  width: 98%;
+  justify-content: space-between;
+  align-items: center;
+}
+.PokemonDetailCardToolBar_overallButton {
+  color: #ffffff;
+  font-family: "Oxanium-ExtraBold";
+  text-transform: uppercase;
+  text-align: center;
+}
+.PokemonDetailCardToolBar_overallButton:hover {
+  cursor: pointer;
+}
+.PokemonDetailCardToolBar_overallButton:hover svg path {
+  fill-opacity: 0.85;
+}
+.PokemonDetailCardToolBar_overallButton h4 {
+  padding: 0 0.5rem 0.5rem 0.5rem;
+  letter-spacing: 0.15rem;
+  font-size: 0.8rem;
+}
+.PokemonDetailCardToolBar-previousBtn:hover .pagination_button_outter,
+.PokemonDetailCardToolBar-nextBtn:hover .pagination_button_outter {
+  background-color: red;
+}
+.PokemonDetailCardToolBar .pagination_button_outter {
+  width: 3rem;
+  height: 1.6rem;
+  border-radius: 4rem 4rem 0 0;
+  background-color: #a70707;
+  transition: all 0.2s linear;
+}
+.PokemonDetailCardToolBar-previousBtn:hover .pagination_button_inner,
+.PokemonDetailCardToolBar-nextBtn:hover .pagination_button_inner {
+  background-color: #ffffff;
+}
+.PokemonDetailCardToolBar .pagination_button_inner {
+  width: 2rem;
+  height: 2rem;
+  border: 0.3rem solid #252530;
+  transform: translate(-52%, -14%) rotate(270deg);
+  transition: all 0.2s linear;
+}
+.PokemonDetailCardToolBar svg {
+  padding-top: 0.5rem;
+  height: 2.8rem;
+  width: 4.2rem;
+}
+.PokemonDetailCardToolBar svg path {
+  fill: #edc43f;
+  transition: all 0.2s linear;
+}
+.PokemonDetailCardToolBar-previousBtn,
+.PokemonDetailCardToolBar-nextBtn {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  width: 15rem;
+}
+.PokemonDetailCardToolBar-previousBtn:hover .PokemonDetailCardToolBar-index,
+.PokemonDetailCardToolBar-nextBtn:hover .PokemonDetailCardToolBar-index {
+  color: #edc43f;
+}
+.PokemonDetailCardToolBar-previousBtn:hover .button_info,
+.PokemonDetailCardToolBar-nextBtn:hover .button_info {
+  color: #ffffff;
+}
+.PokemonDetailCardToolBar-nextBtn {
+  text-align: right;
+  justify-content: end;
+}
+.PokemonDetailCardToolBar-previousBtn.hidden {
+  visibility: hidden;
+}
+.PokemonDetailCardToolBar-previousBtn .button_info {
+  padding-left: 0.5rem;
+  width: 5rem;
+}
+.PokemonDetailCardToolBar-nextBtn .button_info {
+  padding-right: 0.5rem;
+}
+.button_info {
+  font-family: "Oxanium-SemiBold";
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  color: #a8acb2;
+  transition: all 0.2s linear;
+}
+.PokemonDetailCardToolBar-index {
+  color: rgba(237, 213, 63, 0.5);
+}
+.PokemonDetailCardToolBar-name {
+  font-family: "Oxanium-ExtraBold";
+}
+
+@media (max-width: 420px) {
+  .PokemonDetailCardToolBar .pagination_button_outter {
+    display: none;
+  }
+  .PokemonDetailCardToolBar-previousBtn,
+  .PokemonDetailCardToolBar-nextBtn {
+    width: 5rem;
+  }
+}

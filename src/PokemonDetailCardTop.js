@@ -26,10 +26,14 @@ const PokemonDetailCard = ({ pokemonId, pokemonMeta1, pokemonSpecieData }) => {
       (entry) =>
         entry.language.name === "en" &&
         (entry.version.name === "shield" ||
-          entry.version.name === "lets-go-pikachu")
+          entry.version.name === "lets-go-pikachu" ||
+          entry.version.name === "ultra-sun" ||
+          entry.version.name === "black" ||
+          entry.version.name === "x" ||
+          entry.version.name === "violet")
     ) || [];
 
-  console.log(pokemonSpecieData);
+  // console.log(pokemonSpecieData);
   const formatPokemonHeightWeight = (number) => number / 10;
   const formatPokemonIdToFourDigits = (number) =>
     number.toString().padStart(4, "0");
@@ -159,18 +163,23 @@ const PokemonDetailCard = ({ pokemonId, pokemonMeta1, pokemonSpecieData }) => {
               <div className="pokemonDetailCard_info-title">Ability</div>
               {pokemonMeta1.abilities.length > 1 ? (
                 <div className="pokemonDetailCard_info-abilities-container">
-                  {pokemonMeta1.abilities.map((ability, index) => (
-                    <div
-                      key={index}
-                      className={`pokemonDetailCard_info-ability ${
-                        index % 2 === 0
-                          ? "yellow-background"
-                          : "white-background"
-                      }`}
-                    >
-                      {ability.ability.name}
-                    </div>
-                  ))}
+                  {pokemonMeta1.abilities
+                    .map((ability) => ability.ability.name) // Extract ability names
+                    .filter(
+                      (ability, index, self) => self.indexOf(ability) === index
+                    ) // Filter out duplicates
+                    .map((ability, index) => (
+                      <div
+                        key={index}
+                        className={`pokemonDetailCard_info-ability ${
+                          index % 2 === 0
+                            ? "yellow-background"
+                            : "white-background"
+                        }`}
+                      >
+                        {ability}
+                      </div>
+                    ))}
                 </div>
               ) : (
                 <div className="pokemonDetailCard_info-abilities-conttainer">

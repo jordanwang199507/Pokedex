@@ -96,3 +96,12 @@
 .base-bar-total {
   width: 100%;
 }
+
+@media (max-width: 850px) {
+  .pokemonDetailCard_base-name {
+    width: 5rem;
+  }
+  .pokemonDetailCard_base-value {
+    width: 5rem;
+  }
+}

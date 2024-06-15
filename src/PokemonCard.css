@@ -408,7 +408,7 @@
 .pokemon_card_name-primary {
   font-family: "Oxanium-Bold";
   text-transform: uppercase;
-  font-size: 1.4rem;
+  font-size: 1.25rem;
   width: 100%;
   word-wrap: break-word;
   color: rgb(255, 255, 255);
@@ -588,3 +588,10 @@
   background: #7ed4c9;
   /* box-shadow: 0px 0px 10px 0px rgba(126, 212, 201, 0.7); */
 }
+
+/* @media (max-width: 1000px) {
+  .pokemon_card_border {
+    height: 17.5rem;
+    width: 14rem;
+  }
+} */

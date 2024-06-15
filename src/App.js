@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
 import "./App.css";
 import PokemonCard from "./PokemonCard";
+import PokemonDetailCardToolBar from "./PokemonDetailCardToolBar";
 import PokemonDetailCardTop from "./PokemonDetailCardTop";
 import PokemonDetailCardMiddle from "./PokemonDetailCardMiddle";
 import SidebarGenBlock from "./SidebarGenBlock";
 import SidebarPokemonBlock from "./SidebarPokemonBlock";
+import { ReactComponent as PokeBall } from "./assets/Pokeball.svg";
 
 const API_URL_INITIAL = "https://pokeapi.co/api/v2/pokemon/?limit=20&offset=";
 
@@ -14,7 +16,7 @@ const pokemon1 = {
 };
 
 const App = () => {
-  const pokemonGenerations = [
+  const originalPokemonGenerations = [
     {
       generation: 1,
       start: 1,
@@ -90,15 +92,28 @@ const App = () => {
   ];
 
   const [pokemonPageCounter, setPokemonPageCounter] = useState(0);
+  const [isSidebarVisible, setIsSidebarVisible] = useState(false);
   const [selectedPokemonGeneration, setSelectedPokemonGeneration] = useState(0);
 
   const [viewPokemonCards, setViewPokemonCards] = useState(true);
   const [targetPokemon, setTargetPokemon] = useState();
   const [targetPokemonMetadata1, setTargetPokemonMetadata1] = useState();
   const [targetPokemonSpeciedata1, setTargetPokemonSpeciedata1] = useState();
+  const [previousTargetPokemon, setPreviousTargetPokemon] = useState();
+  const [previousTargetPokemonMetadata1, setPreviousTargetPokemonMetadata1] =
+    useState();
+  const [previousTargetPokemonSpeciedata1, setPreviousargetPokemonSpeciedata1] =
+    useState();
+  const [nextTargetPokemon, setNextTargetPokemon] = useState();
+  const [nextTargetPokemonMetadata1, setNextTargetPokemonMetadata1] =
+    useState();
+  const [nextTargetPokemonSpeciedata1, setNextTargetPokemonSpeciedata1] =
+    useState();
   const [pokemonTypeData, setPokemonTypeData] = useState({});
-
-  const cardsPerPage = 32;
+  const [cardsPerPage, setCardsPerPage] = useState(getCardsPerPage());
+  const [pokemonGenerations, setPokemonGenerations] = useState(
+    originalPokemonGenerations
+  );
   const totalPages = Math.ceil(
     pokemonGenerations[selectedPokemonGeneration].total / cardsPerPage
   ); // Assuming you have 1025 Pokemon
@@ -110,7 +125,20 @@ const App = () => {
     const data = await response.json();
     return data;
   };
-
+  function getCardsPerPage() {
+    if (window.innerWidth <= 776) {
+      return 24;
+    } else if (window.innerWidth >= 788 && window.innerWidth <= 939) {
+      return 25;
+    } else if (window.innerWidth <= 1402) {
+      return 24;
+    } else {
+      return 28;
+    }
+  }
+  const toggleSidebarVisibility = () => {
+    setIsSidebarVisible(!isSidebarVisible);
+  };
   useEffect(() => {
     const fetchAllTypesData = async () => {
       const allData = {};
@@ -119,10 +147,27 @@ const App = () => {
         allData[data.name] = data;
       }
       setPokemonTypeData(allData);
-      console.log(allData); // Logging the fetched data after the state update
+    };
+    fetchAllTypesData();
+    const handleResize = () => {
+      if (window.innerWidth < 1000) {
+        setPokemonGenerations(
+          originalPokemonGenerations.map((gen) => ({
+            ...gen,
+            name: gen.name.replace("Generation", "Gen."),
+          }))
+        );
+      } else {
+        setPokemonGenerations(originalPokemonGenerations);
+      }
+      setCardsPerPage(getCardsPerPage());
     };
 
-    fetchAllTypesData();
+    window.addEventListener("resize", handleResize);
+    // Clean up the event listener on component unmount
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
   //   const handlePageSelect = (event) => {
   //     setPokemonPageCounter(Number(event.target.value));
@@ -132,12 +177,25 @@ const App = () => {
     viewPokemonCards,
     pokemonId,
     pokemonMetaData1,
-    pokemonSpecieData
+    pokemonSpecieData,
+    previousPokemonId,
+    previousPokemonMetaData1,
+    previousPokemonSpecieData,
+    nextPokemonId,
+    nextPokemonMetaData1,
+    nextPokemonSpecieData
   ) => {
     setViewPokemonCards(viewPokemonCards);
     setTargetPokemon(pokemonId);
     setTargetPokemonMetadata1(pokemonMetaData1);
     setTargetPokemonSpeciedata1(pokemonSpecieData);
+    setPreviousTargetPokemon(previousPokemonId);
+    setPreviousTargetPokemonMetadata1(previousPokemonMetaData1);
+    setPreviousargetPokemonSpeciedata1(previousPokemonSpecieData);
+    setNextTargetPokemon(nextPokemonId);
+    setNextTargetPokemonMetadata1(nextPokemonMetaData1);
+    setNextTargetPokemonSpeciedata1(nextPokemonSpecieData);
+    setIsSidebarVisible(false);
   };
 
   const handleSelectGeneration = (generation) => {
@@ -165,7 +223,16 @@ const App = () => {
     <div className="App">
       {viewPokemonCards ? (
         <>
-          <div className="sidebar">
+          <div
+            className={`sidebar_button ${
+              isSidebarVisible ? "visible" : "hidden"
+            }`}
+            onClick={toggleSidebarVisibility}
+          >
+            <PokeBall className={``} />
+            <h4>Select Generation</h4>
+          </div>
+          <div className={`sidebar ${isSidebarVisible ? "visible" : "hidden"}`}>
             {pokemonGenerations.map((generation, index) => (
               <SidebarGenBlock
                 key={index}
@@ -180,10 +247,6 @@ const App = () => {
             ))}
           </div>
           <div className="container">
-            <div id="outer-circle">
-              <div id="inner-circle"></div>
-            </div>
-
             <div className="pokedex_title_row">
               <div className="pokedex_title_container">
                 <h1 className="pokedex_title">
@@ -225,9 +288,10 @@ const App = () => {
                   className="pagination_button_outter previous"
                   onClick={updateToPreviousPage}
                 >
-                  <div className="pagination_button_inner previous">
+                  {/* <div className="pagination_button_inner previous">
                     &lt; Prev.
-                  </div>
+                  </div> */}
+                  <div className="pagination_button_inner previous">Prev.</div>
                 </button>
               ) : (
                 ""
@@ -256,14 +320,16 @@ const App = () => {
                 className="pagination_button_outter"
                 onClick={updateToNextPage}
               >
-                <div className="pagination_button_inner">Next &gt;</div>
+                {/* <div className="pagination_button_inner">Next &gt;</div> */}
+
+                <div className="pagination_button_inner">Next</div>
               </button>
             </div>
           </div>
         </>
       ) : (
         <>
-          <div className="sidebar">
+          <div className={`sidebar ${isSidebarVisible ? "visible" : "hidden"}`}>
             {Array.from(
               {
                 length: pokemonGenerations[selectedPokemonGeneration].total,
@@ -273,10 +339,32 @@ const App = () => {
                   index={
                     pokemonGenerations[selectedPokemonGeneration].start + index
                   }
+                  target={targetPokemon}
                   viewPokemonDetailAnalog={viewPokemonDetailAnalog}
                 />
               )
             )}
+          </div>
+          <PokemonDetailCardToolBar
+            viewDetailAnalog={viewPokemonDetailAnalog}
+            pokemonId={targetPokemon}
+            pokemonMeta1={targetPokemonMetadata1}
+            pokemonSpecieData={targetPokemonSpeciedata1}
+            previousPokemonId={previousTargetPokemon}
+            previousPokemonMeta1={previousTargetPokemonMetadata1}
+            previousPokemonSpecieData={previousTargetPokemonSpeciedata1}
+            nextPokemonId={nextTargetPokemon}
+            nextPokemonMeta1={nextTargetPokemonMetadata1}
+            nextPokemonSpecieData={nextTargetPokemonSpeciedata1}
+          />
+          <div
+            className={`sidebar_button detailcard_sidebar-btn ${
+              isSidebarVisible ? "visible" : "hidden"
+            }`}
+            onClick={toggleSidebarVisibility}
+          >
+            <PokeBall className={``} />
+            <h4>Select Generation</h4>
           </div>
           <div className="container">
             <PokemonDetailCardTop

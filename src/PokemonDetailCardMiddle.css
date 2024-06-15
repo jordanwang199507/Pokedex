@@ -30,10 +30,112 @@
   margin-bottom: 2rem;
 }
 .pokemonDetailCardMiddle_damage-primary-title span {
-  color: #edd53f;
+  color: #edc43f;
   font-size: 1.4rem;
 }
 .pokemonDetailCardMiddle_allDamage-container {
   display: flex;
   width: 100%;
+}
+
+@media (max-width: 1000px) {
+  .pokemonDetailCardMiddle_baseState-container {
+    margin: 1.5rem 0 3rem 0;
+  }
+  .pokemonDetailCardMiddle {
+    margin: 0 12.5rem 3rem 12.5rem;
+  }
+  /* .pokemonDetailCardMiddle_allDamage-container {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+  }
+  .pokemonDetailCardMiddle_allDamage-container > * {
+    flex: 1 1 30%;
+    margin: 0.75rem;
+  } */
+  .pokemonDetailCardMiddle_allDamage-container {
+    flex-direction: row;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .pokemonDetailCardMiddle_allDamage-container > * {
+    /* flex: 1 1 40%; */
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+  }
+
+  .pokemonDetailCardMiddle_damage-innercontainer:not(:last-child) {
+    margin-right: 0;
+  }
+  .pokemonDetailCardMiddle_damage-innercontainer {
+    width: 100%;
+    min-width: unset;
+    margin: 0.75rem 0rem 0.75rem 0rem;
+    display: flex;
+  }
+
+  .pokemonDetailCardMiddle_damage-title-container {
+    width: 12rem;
+    min-width: 12rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 900px) {
+  .pokemonDetailCardMiddle_baseState_title,
+  .pokemonDetailCardMiddle_damage-primary-title {
+    font-size: 1.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .pokemonDetailCardMiddle_damage-primary-title {
+    margin-top: 2rem;
+  }
+}
+@media (max-width: 850px) {
+  .pokemonDetailCardMiddle {
+    margin: 0 5rem 3rem 5rem;
+  }
+}
+@media (max-width: 700px) {
+  .pokemonDetailCardMiddle {
+    margin: 0 3.5rem 3rem 3.5rem;
+  }
+}
+@media (max-width: 550px) {
+  .pokemonDetailCard_family {
+    font-size: 1.4rem;
+  }
+  .pokemonDetailCard_pokedex-entry {
+    font-size: 1.2rem;
+  }
+  .pokemonDetailCardMiddle_baseState_title,
+  .pokemonDetailCardMiddle_damage-primary-title {
+    font-size: 1.4rem;
+  }
+  .pokemonDetailCard_base-name,
+  .pokemonDetailCard_base-value {
+    font-size: 1.2rem;
+  }
+
+  .pokemonDetailCard_base-bar {
+    height: 1.2rem;
+  }
+  .pokemonDetailCardMiddle_damage-title-container {
+    width: 8rem;
+    min-width: 8rem;
+  }
+  .pokemonDetailCardMiddle_damage-secondary-title {
+    padding: 0.5rem 0;
+    height: fit-content;
+  }
+}
+@media (max-width: 420px) {
+  .pokemonDetailCardMiddle {
+    margin: 0 2rem 3rem 2rem;
+  }
 }
