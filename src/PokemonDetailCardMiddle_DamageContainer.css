@@ -1,12 +1,13 @@
 .pokemonDetailCardMiddle_damage-innercontainer {
-  background-color: #676c78;
-  padding: 0.5rem;
+  background-color: #2f2f3d;
+  padding: 0.75rem 0.5rem;
   border-radius: 0.75rem;
   min-width: 12rem;
   width: 25%;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
 }
 .pokemonDetailCardMiddle_damage-innercontainer:not(:last-child) {
-  margin-right: 0.5rem;
+  margin-right: 0.75rem;
 }
 .pokemonDetailCardMiddle_damage-title-container {
   background-color: #252530;

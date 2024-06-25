@@ -19,12 +19,14 @@ const PokemonDetailCardMiddle_BaseStat = ({ name, statValue, color }) => {
           {statValue}
         </div>
         <div className="pokemonDetailCard_base-graph">
-          <div
-            className={`pokemonDetailCard_base-bar ${assignBaseStatColor(
-              "bar"
-            )}`}
-            style={{ width: `${(statValue / 252) * 100}%` }}
-          ></div>
+          <div className="bar">
+            <div
+              className={`pokemonDetailCard_base-bar ${assignBaseStatColor(
+                "bar"
+              )}`}
+              style={{ width: `${(statValue / 252) * 100}%` }}
+            ></div>
+          </div>
         </div>
       </div>
     </>

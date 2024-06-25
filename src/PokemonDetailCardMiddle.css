@@ -1,9 +1,12 @@
 .pokemonDetailCardMiddle {
   margin: 2.5rem;
+  transition: all 0.2s linear;
 }
 .pokemonDetailCardMiddle_baseState-container {
   border-radius: 1rem;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  transition: all 0.2s linear;
 }
 
 .pokemonDetailCardMiddle_baseState_title {
@@ -36,6 +39,7 @@
 .pokemonDetailCardMiddle_allDamage-container {
   display: flex;
   width: 100%;
+  transition: all 0.2s linear;
 }
 
 @media (max-width: 1000px) {

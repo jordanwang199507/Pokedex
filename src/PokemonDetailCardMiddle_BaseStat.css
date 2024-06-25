@@ -15,6 +15,7 @@
   text-transform: uppercase;
   color: #ffffff;
   font-family: "Oxanium-SemiBold";
+  transition: all 0.2s linear;
 }
 
 .pokemonDetailCard_base-value {
@@ -22,6 +23,7 @@
   width: 10%;
   text-align: center;
   font-family: "Oxanium-ExtraBold";
+  transition: all 0.2s linear;
 }
 .base-value-red {
   color: #d94256;
@@ -57,6 +59,20 @@
   overflow: hidden;
   width: 75%;
   padding: 0.5rem 0;
+}
+@keyframes baranimation {
+  0% {
+    width: 0%;
+  }
+
+  100% {
+    width: 100%;
+  }
+}
+.bar {
+  animation-name: baranimation;
+  animation-duration: 0.2s;
+  animation-timing-function: linear;
 }
 
 .pokemonDetailCard_base-bar {
