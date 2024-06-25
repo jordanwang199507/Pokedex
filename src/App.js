@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "./App.css";
+// import "./App.css";
+import "./style.css";
 import PokemonCard from "./PokemonCard";
 import PokemonDetailCardToolBar from "./PokemonDetailCardToolBar";
 import PokemonDetailCardTop from "./PokemonDetailCardTop";
@@ -327,7 +328,7 @@ const App = () => {
 
   return (
     <div className="App">
-      <div className="test">
+      <div className="pokedex_homepage-container">
         <div className="pokedex_homepage">
           <img src={sun} id="sun" />
           <img src={landscape} id="landscape" />

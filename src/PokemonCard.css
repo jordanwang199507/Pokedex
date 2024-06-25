@@ -9,10 +9,7 @@
   background: #292f3f;
   cursor: pointer;
   border: 1px solid rgba(126, 126, 126, 0.2);
-  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075),
-    /* shadow ring 👇 */ 0 0 0 1px hsla(0, 0%, 0%, 0.05),
-    /* multiple soft shadows 👇 */ 0 0.3px 0.4px hsla(0, 0%, 0%, 0.02),
-    0 0.9px 1.5px hsla(0, 0%, 0%, 0.045), 0 3.5px 6px hsla(0, 0%, 0%, 0.09);
+  box-shadow: inset 0 0 0.5px 1px hsla(0, 0%, 100%, 0.075);
 }
 
 .pokemon_card_border_type_grass:hover {
@@ -73,9 +70,6 @@
 .pokemon_card {
   height: 100%;
   width: 100%;
-  /* height: 24em; */
-  /* width: 15.125em; */
-  /* margin: 35px 20px 20px 20px; */
   position: relative;
   display: flex;
   flex-direction: column;
@@ -232,7 +226,6 @@
   );
 } */
 
-/* pokemon card stats container START */
 .pokemon_card_image-section {
   position: relative;
   height: 8.5rem;
@@ -314,15 +307,7 @@
 .pokemon_card_border:hover .pokemon_card_pokeball_type_ice path {
   fill: #7ed4c9;
 }
-/* .pokemon_card_image-container {
-  height: 85px;
-  width: 85px;
-  margin: auto;
-  margin-top: -30%;
-  margin-bottom: 15px;
-  transform: scale(1.05);
-  z-index: 3;
-} */
+
 .pokemon_card_image-container {
   z-index: 2;
   position: relative;
@@ -337,14 +322,10 @@
   transform: scale(1.13) translateY(-0.3rem);
   filter: drop-shadow(0 0 5px rgba(0, 0, 0, 0.88));
 }
-/* pokemon card stats container END */
 
-/* pokemon card stats container START */
 .pokemon_card_stats-container {
   padding-left: 0.4rem;
   z-index: 2;
-  /* box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
-    rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset; */
 }
 
 /* .pokemon_card_stats-top {
@@ -449,9 +430,6 @@
 .pokemon_card_text-secondary span {
   font-size: 1.2rem;
 }
-/* pokemon card stats container END */
-
-/* pokemon card type container START */
 
 .pokemon_card_type-container {
   position: relative;
@@ -486,6 +464,7 @@
   height: 100%;
   width: 100%;
 }
+
 /* .pokemon_card_type {
   width: 95px;
   height: 28px;
@@ -588,10 +567,3 @@
   background: #7ed4c9;
   /* box-shadow: 0px 0px 10px 0px rgba(126, 212, 201, 0.7); */
 }
-
-/* @media (max-width: 1000px) {
-  .pokemon_card_border {
-    height: 17.5rem;
-    width: 14rem;
-  }
-} */

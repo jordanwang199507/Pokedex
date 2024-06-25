@@ -11,14 +11,9 @@
   transform: scale(1.13) translateY(-0.3rem);
 }
 
-.sidebar_pokemon.active .sidebar_pokemon_name {
-  /* color: #edc43f; */
-}
 .sidebar_pokemon.active .sidebar_pokemon_index {
   color: #edc43f;
   opacity: 0.8;
-}
-.sidebar_pokemon:nth-child(odd) {
 }
 
 .sidebar_pokemon:hover {
@@ -70,12 +65,6 @@
   width: 40%;
 }
 
-@media (max-width: 1225px) {
-  /* .sidebar_block {
-    min-height: 9rem;
-    width: 90%;
-  } */
-}
 @media (max-width: 1100px) {
   .sidebar_pokemon_image {
     width: 6rem;

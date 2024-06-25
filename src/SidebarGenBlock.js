@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "./SidebarGenBlock.css";
+// import "./SidebarGenBlock.css";
+import "./style.css";
 import gen1Image from "./assets/gen1.png";
 import gen2Image from "./assets/gen2.png";
 import gen3Image from "./assets/gen3.png";

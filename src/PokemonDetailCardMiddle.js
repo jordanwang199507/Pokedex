@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import PokemonDetailCardMiddle_BaseStat from "./PokemonDetailCardMiddle_BaseStat";
 import PokemonDetailCardMiddle_DamageContainer from "./PokemonDetailCardMiddle_DamageContainer";
 
-import "./PokemonDetailCardMiddle.css";
-
+// import "./PokemonDetailCardMiddle.css";
+import "./style.css";
 const PokemonDetailCardMiddle = ({
   pokemonId,
   pokemonMeta1,

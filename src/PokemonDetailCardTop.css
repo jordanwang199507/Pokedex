@@ -120,8 +120,6 @@
 }
 .pokemonDetailCard_info-ability:last-child {
   margin-right: 0rem;
-  /* min-width: 12rem;
-  width: 10rem; */
   width: fit-content;
   text-align: center;
 }

@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "./PokemonCard.css";
+// import "./PokemonCard.css";
+import "./style.css";
 import { ReactComponent as PokeBallUnder } from "./assets/Pokeball_under.svg";
 import bugIcon from "./type-icons/bug.png";
 import darkIcon from "./type-icons/dark.png";

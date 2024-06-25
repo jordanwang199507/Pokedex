@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import "./PokemonDetailCardMiddle_BaseStat.css";
-
+// import "./PokemonDetailCardMiddle_BaseStat.css";
+import "./style.css";
 const PokemonDetailCardMiddle_BaseStat = ({ name, statValue, color }) => {
   const assignBaseStatColor = (valueOrGraph) => {
     return valueOrGraph === "value"

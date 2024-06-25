@@ -3,14 +3,6 @@
   grid-column: center-start / center-end;
   padding-top: 0.2rem;
   padding-bottom: 0.5rem;
-  /* background-color: #282f40; */
-  /* background: linear-gradient(
-    180deg,
-    rgba(40, 47, 64, 0.8) 0%,
-    #252530 50%,
-    rgba(39, 42, 56, 0.9) 100%
-  ); */
-  /* background: linear-gradient(180deg, #252530 0%, rgba(40, 47, 64, 0.8) 100%); */
 }
 .PokemonDetailCardToolBar-container {
   margin: 0rem auto 0rem auto;

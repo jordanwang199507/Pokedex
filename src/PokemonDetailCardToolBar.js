@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "./PokemonDetailCardToolBar.css";
+// import "./PokemonDetailCardToolBar.css";
+import "./style.css";
 import { ReactComponent as PokeBall } from "./assets/Pokeball.svg";
 
 const PokemonDetailCardToolBar = ({

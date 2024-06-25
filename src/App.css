@@ -8,15 +8,12 @@ html {
   box-sizing: border-box;
 }
 
-/* SCROLLBAR */
-/* Let's get this party started */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  /* background: rgb(0, 0, 0, 0.4); */
   background: #252530;
   border: 2px solid transparent;
   background-clip: content-box; /* THIS IS IMPORTANT */
@@ -25,7 +22,6 @@ html {
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #edd63f6c;
-  /* background: #252530; */
   border-radius: 5px;
 }
 
@@ -62,10 +58,12 @@ html {
   font-family: "Oxanium-SemiBold";
   src: URL("/public/fonts/Oxanium-SemiBold.ttf") format("truetype");
 }
+
 .App {
   background: #252530;
 }
-.test {
+
+.pokedex_homepage-container {
   width: 100%;
   height: 90%;
   display: flex;
@@ -75,7 +73,6 @@ html {
   justify-content: end;
 }
 .pokedex_homepage {
-  /* display: grid; */
   background: linear-gradient(
     180deg,
     rgba(37, 37, 48, 1) 0%,
@@ -114,7 +111,6 @@ html {
   width: 100%;
   pointer-events: none;
 }
-
 .pokedex_homepage-shadow {
   width: 100%;
   height: 100%;
@@ -161,7 +157,6 @@ html {
   left: 450px;
   top: -50px;
 }
-
 .homepage_mountain {
   width: 100%;
   position: absolute;
@@ -172,6 +167,7 @@ html {
 .homepage_wave_back {
   position: absolute;
 }
+
 .pokedex {
   width: 100%;
   box-sizing: border-box;
@@ -192,7 +188,7 @@ html {
   min-height: 100%;
   max-height: 104.2rem;
   height: auto;
-  overflow-y: auto; /* Enables vertical scrolling when content exceeds the container's height */
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   background: #4e5466;
@@ -282,7 +278,7 @@ html {
   row-gap: 3rem;
   align-items: center;
   justify-content: center;
-  width: 90%; /* Adjust width as needed */
+  width: 90%;
   padding-left: 2rem;
   margin: auto;
   transition: all 0.2s linear;
@@ -297,8 +293,8 @@ html {
 .pagination {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; /* Spacing between buttons */
-  justify-content: center; /* Center the pagination buttons */
+  gap: 10px;
+  justify-content: center;
   padding: 20px;
 }
 .pagination_button_outter {
@@ -359,7 +355,6 @@ html {
 
 footer {
   padding: 5rem;
-  /* background-color: #2e2c2c; */
   background-color: #2f2f3d;
   width: 100%;
   max-width: 1420px;
@@ -369,7 +364,6 @@ footer {
 }
 
 footer p {
-  /* color: #a8acb2; */
   color: #ffffff;
   opacity: 0.35;
   font-family: "Oxanium-SemiBold";
@@ -642,7 +636,7 @@ hr {
   }
 }
 
-@media (min-width: 480px) {
+/* @media (min-width: 480px) {
 }
 @media (min-width: 481px) and (max-width: 768px) {
 }
@@ -651,4 +645,4 @@ hr {
 }
 
 @media (min-width: 1025px) {
-}
+} */

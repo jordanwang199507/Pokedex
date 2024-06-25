@@ -45,11 +45,6 @@
   cursor: default;
 }
 .sidebar_block_gen_title_container {
-  /* position: relative;
-  width: fit-content;
-  block-size: fit-content;
-  margin: 0 auto;
-  color: #ffffff; */
   display: block;
   position: absolute;
   width: 100%;
@@ -98,6 +93,7 @@
   width: 16rem;
   transition: all 0.2s linear;
 }
+
 @media (max-width: 1225px) {
   .sidebar_block_image-container img {
     width: 12rem;

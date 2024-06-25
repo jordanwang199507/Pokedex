@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import "./SidebarPokemonBlock.css";
+// import "./SidebarPokemonBlock.css";
+import "./style.css";
 import bugIcon from "./type-icons/bug.png";
 import darkIcon from "./type-icons/dark.png";
 import dargonIcon from "./type-icons/dragon.png";
