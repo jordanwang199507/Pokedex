@@ -14,6 +14,10 @@
 - [🐤 Pokedex](#-pokedex)
   - [Table of Content](#table-of-content)
   - [🚙 Getting Started](#-getting-started)
+  - [🧋Adjust CSS style](#-adjust-css-style)
+  - [🧱 Main Structure](#-main-structure)
+  - [📘 Tech Stack](#-tech-stack)
+  - [🔨 Created By](#-created-by)
  
 ---
 ## 🚙 Getting Started
@@ -49,7 +53,7 @@
 └─── README.md
 ```
 
-## 📘 Tech Stack (Dependencies)
+## 📘 Tech Stack
 - [React](https://react.dev/)
 - [mui/icons-material](https://MUI.com/)
 
